@@ -23,5 +23,15 @@
     "system/**",
     "third_party/**",
     "tools/**",
-  ]
+  ],
+  "files.associations": {
+    "*.dbclient-js": "javascript",
+    "cassert": "cpp",
+    "csignal": "cpp",
+    "cstdio": "cpp",
+    "array": "cpp",
+    "string": "cpp",
+    "string_view": "cpp",
+    "vector": "cpp"
+  }
 }

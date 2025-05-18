@@ -109,6 +109,10 @@ std::optional<ProcStat> procStat(std::string stat) {
 
 // return list of PIDs from /proc
 std::vector<int> pids() {
+#ifdef __APPLE__
+  // macOS doesn't have /proc, so return an empty list or use sysctl for PIDs if needed
+  return {};
+#else
   std::vector<int> ids;
   DIR *d = opendir("/proc");
   assert(d);
@@ -124,6 +128,7 @@ std::vector<int> pids() {
   }
   closedir(d);
   return ids;
+#endif
 }
 
 // null-delimited cmdline arguments to vector

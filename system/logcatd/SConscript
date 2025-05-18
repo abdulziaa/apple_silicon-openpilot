@@ -1,3 +1,12 @@
 Import('env', 'messaging', 'common')
+import os
 
-env.Program('logcatd', 'logcatd_systemd.cc', LIBS=[messaging, common, 'systemd'])
+# Build the binary using SCons's normal build path
+bin = env.Program('logcatd_bin', 'logcatd_systemd.cc', LIBS=[messaging, common])
+
+# Explicitly copy it to system/logcatd/logcatd where nativelauncher expects it
+out_path = os.path.join('#system/logcatd/logcatd')
+copied_bin = env.Command(out_path, bin, Copy("$TARGET", "$SOURCE"))
+
+# Define an alias to build and copy the binary
+env.Alias('logcatd_install', copied_bin)

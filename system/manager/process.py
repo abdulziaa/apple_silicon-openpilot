@@ -53,6 +53,8 @@ def nativelauncher(pargs: list[str], cwd: str, name: str) -> None:
 
   # exec the process
   os.chdir(cwd)
+  if not os.path.isfile(pargs[0]):
+    raise FileNotFoundError(f"Executable not found: {pargs[0]}")
   os.execvp(pargs[0], pargs)
 
 
