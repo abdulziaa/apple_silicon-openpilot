@@ -359,8 +359,8 @@ SConscript([
 if arch != "Darwin":
   SConscript([
     'system/sensord/SConscript',
-    'system/logcatd/SConscript',
   ])
+SConscript('system/logcatd/SConscript')
 
 if arch == "larch64":
   SConscript(['system/camerad/SConscript'])
